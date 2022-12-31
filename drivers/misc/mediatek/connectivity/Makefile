@@ -56,6 +56,7 @@ endif
     export MTK_WLAN_SERVICE=y
     export WIFI_IP_SET=2
     export WIFI_ECO_VER=1
+    export BT_PLATFORM=connac1x
 
     # Do build-in for xxx.c checking
     subdir-ccflags-y += -D MTK_WCN_REMOVE_KERNEL_MODULE
@@ -64,6 +65,7 @@ endif
     obj-$(CONFIG_MTK_COMBO) += common/
     obj-$(CONFIG_MTK_COMBO_WIFI) += wlan/adaptor/
     obj-$(CONFIG_MTK_COMBO_WIFI) += wlan/core/gen4m/
+    obj-$(CONFIG_MTK_COMBO_BT) += bt/mt66xx/
     obj-$(CONFIG_MTK_COMBO_GPS) += gps/
     obj-$(CONFIG_MTK_FMRADIO) += fmradio/
 

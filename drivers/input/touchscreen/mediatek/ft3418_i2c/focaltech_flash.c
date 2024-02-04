@@ -43,7 +43,7 @@
 #define FTS_FW_NAME_PREX_WITH_REQUEST               "focaltech_ts_fw_"
 
 #if LCT_TP_USB_PLUGIN
-extern touchscreen_usb_plugin_data_t g_touchscreen_usb_pulgin;
+//extern touchscreen_usb_plugin_data_t g_touchscreen_usb_pulgin;
 #endif
 
 /*****************************************************************************
@@ -2048,10 +2048,10 @@ static void fts_fwupg_work(struct work_struct *work)
     upg->ts_data->fw_loading = 0;
 	
 #if LCT_TP_USB_PLUGIN
-    if (!IS_ERR_OR_NULL(g_touchscreen_usb_pulgin.event_callback))
-        g_touchscreen_usb_pulgin.valid = true;
-    if (g_touchscreen_usb_pulgin.valid)
-        g_touchscreen_usb_pulgin.event_callback();
+    //if (!IS_ERR_OR_NULL(g_touchscreen_usb_pulgin.event_callback))
+        //g_touchscreen_usb_pulgin.valid = true;
+    //if (g_touchscreen_usb_pulgin.valid)
+        //g_touchscreen_usb_pulgin.event_callback();
 #endif
 }
 

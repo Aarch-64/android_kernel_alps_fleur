@@ -2149,7 +2149,7 @@ static int mtk_vcu_suspend(struct device *pDev)
 
 static int mtk_vcu_resume(struct device *pDev)
 {
-	pr_info("[VCU] %s done\n", __func__);
+	dev_dbg("[VCU] %s done\n", __func__);
 	return 0;
 }
 

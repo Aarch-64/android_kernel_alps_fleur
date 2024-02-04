@@ -92,6 +92,7 @@ static int scp_ultra_pcm_dev_probe(struct platform_device *pdev)
 		dev_warn(&pdev->dev, "err_platform\n");
 		goto err_platform;
 	}
+
 	set_scp_ultra_base((void *)scp_ultra);
 
 	return 0;

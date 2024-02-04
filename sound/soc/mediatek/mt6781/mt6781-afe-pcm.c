@@ -141,7 +141,7 @@ int mt6781_fe_trigger(struct snd_pcm_substream *substream, int cmd,
 	unsigned int counter = runtime->period_size;
 	unsigned int rate = runtime->rate;
 	int fs;
-	int ret = 0;
+	int ret;
 	bool dsp_reset = false;
 
 	dev_info(afe->dev, "%s(), %s cmd %d, irq_id %d dsp_reset %d\n",
@@ -5825,6 +5825,7 @@ static int mt6781_afe_pcm_dev_probe(struct platform_device *pdev)
 #if defined(CONFIG_MTK_ULTRASND_PROXIMITY)
 	ultra_set_afe_base(afe);
 #endif
+
 	return 0;
 
 err_dai_component:

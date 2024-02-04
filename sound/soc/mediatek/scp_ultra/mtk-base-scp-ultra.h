@@ -67,5 +67,6 @@ struct ultra_gain_config {
 	int receiver_gain;
 };
 
+
 #endif
 

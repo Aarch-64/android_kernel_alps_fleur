@@ -2129,7 +2129,7 @@ static int zraminfo_proc_show(struct seq_file *m, void *v)
 		zs_pool_stats(zram_devices->mem_pool, &pool_stats);
 		up_read(&zram_devices->init_lock);
 
-#define P2K(x) (((unsigned long)x) << (PAGE_SHIFT - 10))
+#define P2K(x) (((unsigned long)atomic_long_read(&(x))) << (PAGE_SHIFT - 10))
 #define B2K(x) (((unsigned long)x) >> (10))
 		seq_printf(m,
 		"DiskSize:       %8lu kB\n"

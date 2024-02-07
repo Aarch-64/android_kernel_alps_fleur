@@ -6957,8 +6957,8 @@ static void mtk_dsi_vdo_timing_change(struct mtk_dsi *dsi,
 	unsigned int src_mode =
 	    old_mtk_state->prop_val[CRTC_PROP_DISP_MODE_IDX];
 	struct drm_display_mode *old_mode = &(mtk_crtc->avail_modes[src_mode]);
-	unsigned int fps_src = old_mode->vrefresh;
-	unsigned int fps_dst = adjusted_mode.vrefresh;
+	//unsigned int fps_src = old_mode->vrefresh;
+	//unsigned int fps_dst = adjusted_mode.vrefresh;
 #ifdef CONFIG_MTK_MT6382_BDG
 	struct drm_crtc *crtc = NULL;
 	int index = 0;

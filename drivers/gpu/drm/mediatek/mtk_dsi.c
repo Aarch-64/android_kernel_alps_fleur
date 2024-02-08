@@ -2862,6 +2862,8 @@ static void mtk_output_dsi_enable(struct mtk_dsi *dsi,
 		return;
 	}
 
+	dsi->ext->funcs->k7s_dsi_poweron(dsi->panel);
+	msleep(10);
 	if (dsi->slave_dsi) {
 		ret = mtk_preconfig_dsi_enable(dsi->slave_dsi);
 		if (ret < 0) {
@@ -2876,8 +2878,6 @@ static void mtk_output_dsi_enable(struct mtk_dsi *dsi,
 		return;
 	}
 
-	dsi->ext->funcs->k7s_dsi_poweron(dsi->panel);
-	msleep(10);
 	if (dsi->panel) {
 		if ((!dsi->doze_enabled || force_lcm_update)
 			&& drm_panel_prepare(dsi->panel)) {

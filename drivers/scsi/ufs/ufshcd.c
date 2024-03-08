@@ -9361,8 +9361,12 @@ set_link_active:
 	ufshcd_vreg_set_hpm(hba);
 	if (ufshcd_is_link_hibern8(hba) && !ufshcd_uic_hibern8_exit(hba))
 		ufshcd_set_link_active(hba);
-	else if (ufshcd_is_link_off(hba))
+	else if (ufshcd_is_link_off(hba)){
+#if defined(CONFIG_MI_MEMORY_SYSFS)
+		ufsdbg_set_err_state("ufshcd_link_off_fail\n");
+#endif
 		ufshcd_host_reset_and_restore(hba);
+	}
 set_dev_active:
 	if (!ufshcd_set_dev_pwr_mode(hba, UFS_ACTIVE_PWR_MODE))
 		ufshcd_disable_auto_bkops(hba);
@@ -9382,8 +9386,15 @@ out:
 	/* MTK PATCH: Release deepidle/SODI @enter UFS suspend callback */
 	ufshcd_vops_deepidle_lock(hba, false);
 
-	if (ret)
+	if (ret){
+#if defined(CONFIG_MI_MEMORY_SYSFS)
+		dev_info(hba->dev, "ufshcd_suspend_fail\n");
+		if(ret != -EAGAIN){
+			ufsdbg_set_err_state("ufshcd_suspend_fail\n");
+		}
+#endif
 		ufshcd_update_evt_hist(hba, UFS_EVT_SUSPEND_ERR, (u32)ret);
+	}
 	return ret;
 }
 

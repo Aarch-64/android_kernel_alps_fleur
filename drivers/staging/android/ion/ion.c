@@ -1787,46 +1787,12 @@ static void ion_dma_buf_kunmap(struct dma_buf *dmabuf, unsigned long offset,
 static int ion_dma_buf_begin_cpu_access(struct dma_buf *dmabuf,
 					enum dma_data_direction direction)
 {
-	struct ion_buffer *buffer = dmabuf->priv;
-	struct ion_dma_buf_attachment *a;
-
-	if (ion_iommu_heap_type(buffer) ||
-	    buffer->heap->type == (int)ION_HEAP_TYPE_SYSTEM) {
-		IONDBG("%s iommu device, to cache sync\n", __func__);
-
-		mutex_lock(&buffer->lock);
-		list_for_each_entry(a, &buffer->attachments, list) {
-			dma_sync_sg_for_cpu(a->dev,
-					    a->table->sgl,
-					    a->table->nents,
-					    direction);
-		}
-		mutex_unlock(&buffer->lock);
-	}
-
-	return 0;// PTR_ERR_OR_ZERO(vaddr);
+	return 0;
 }
 
 static int ion_dma_buf_end_cpu_access(struct dma_buf *dmabuf,
 				      enum dma_data_direction direction)
 {
-	struct ion_buffer *buffer = dmabuf->priv;
-	struct ion_dma_buf_attachment *a;
-
-	if (ion_iommu_heap_type(buffer) ||
-	    buffer->heap->type == (int)ION_HEAP_TYPE_SYSTEM) {
-		IONDBG("%s iommu device, to cache sync\n", __func__);
-
-		mutex_lock(&buffer->lock);
-		list_for_each_entry(a, &buffer->attachments, list) {
-			dma_sync_sg_for_device(a->dev,
-					       a->table->sgl,
-					       a->table->nents,
-					       direction);
-		}
-		mutex_unlock(&buffer->lock);
-	}
-
 	return 0;
 }
 #else
